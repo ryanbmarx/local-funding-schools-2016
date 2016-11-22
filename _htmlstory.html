@@ -15,23 +15,22 @@
 		</figcaption>
 		<div class='scatter__container' data-highlight='all'></div>
 	</figure>
-	{%- for chart in charts %}
-		{%- if loop.index is odd %}
-			<div class='row'>
-		{% endif %}
-		<div class='six columns'>
-			<figure class='scatter scatter--small' >
-				<figcaption>
-					<p class='scatter__label'>{{ chart.chart_label }}</p>	
-					{{ chart.blurb|markdown }}
-				</figcaption>
-				<div class='scatter__container' data-highlight='{{ chart.county_group }}'></div>
-			</figure>
-		</div>
-		{%- if loop.index is even %}
+	{%- for chart in charts -%}
+	<figure class='scatter scatter--small' >
+		<figcaption>
+			<p class='scatter__label'>{{ chart.chart_label }}</p>	
+			{{ chart.blurb|markdown }}
+		</figcaption>
+		<div class='row'>
+			<div class='four columns'>
+				<img class='scatter__map' src='http://{{ ROOT_URL }}/img/{{ chart.county_group }}.png' alt="Map of Illinois' {{ chart.county_group }} counties"  />
 			</div>
-		{% endif %}
-	{%- endfor %}
+			<div class='eight columns'>
+				<div class='scatter__container' data-highlight='{{ chart.county_group }}'></div>
+			</div>
+		</div>
+	</figure>
+	{%- endfor -%}
 
 	{% include "_lookup-table.html" %}
 
@@ -61,12 +60,13 @@
 		{%- for county_group in ["north", 'chicagoArea', 'central', "south"] -%}
 			{{ county_group }}:[
 				{%- for county in county_groups if county.group == county_group -%}
-				"{{ county.county }}" {% if not loop.last%},{% endif %}
+				"{{ county.county|lower }}" {% if not loop.last%},{% endif %}
 				{%- endfor -%}
 				]{% if not loop.last%},{% endif %}
 		{%- endfor -%}
 	};
 
+	console.log(countyGroups);
   var CSS = [
 	"//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css",
 	"//cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css",
