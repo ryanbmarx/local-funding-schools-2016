@@ -22,6 +22,10 @@ $table_highlight:rgba($trib_blue5, .25);
 	&__label{
 		@include label6();
 	}
+
+	&__map{
+		width:100%;
+	}
 }
 
 .scatter--small{
