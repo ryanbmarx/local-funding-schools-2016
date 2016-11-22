@@ -3,22 +3,116 @@
  #
  # If you want to publish multiple HTML stories, copy, or inherit from
  # this template.
- #
+ # 
  #}
 {% block content %}
+<div class='graphic-wrapper'>
+	{{ intro|markdown }}
+	
+	<figure class='scatter' >
+		<figcaption>
+			<p class='scatter__label'>{{ chart_label }}</p>	
+		</figcaption>
+		<div class='scatter__container' data-highlight='all'></div>
+	</figure>
+	{%- for chart in charts %}
+		{%- if loop.index is odd %}
+			<div class='row'>
+		{% endif %}
+		<div class='six columns'>
+			<figure class='scatter scatter--small' >
+				<figcaption>
+					<p class='scatter__label'>{{ chart.chart_label }}</p>	
+					{{ chart.blurb|markdown }}
+				</figcaption>
+				<div class='scatter__container' data-highlight='{{ chart.county_group }}'></div>
+			</figure>
+		</div>
+		{%- if loop.index is even %}
+			</div>
+		{% endif %}
+	{%- endfor %}
+
+
+
+	<h2 class='districts-lookup-label'>Look up your district</h2>
+	<table id='districts-lookup' class='districts-lookup'>
+		<thead>
+			<tr>
+				<th>District<br /><em>City</em></th>
+				<th>County</th>
+				<th class='align-right'>Enrollment</th>
+				<th class='align-right'>Local revenue</th>
+				<th class='align-right'>Percentage local <br />revenue</th>
+			</tr>
+		</thead>
+		<tbody>
+			{%- for district in districts -%}
+				<tr class='district' data-county="{{ district.county|lower }}">
+					<td>
+						<span class='district__name'>{{ district.district_name }}</span> <br />
+						<span class='district__city'>{{ district.city }}</span>
+					</td>
+					<td class='district__county'>{{ district.county }}</td>
+					<td class='align-right'>
+						{% if district.DISTRICT_TOTAL_ENROLLMENT %}
+							{{ "{:,}".format(district.DISTRICT_TOTAL_ENROLLMENT) }}
+						{% else %}
+							Not available
+						{% endif %}
+					</td>
+					<td class='align-right'>
+						{% if district.total_local_dollars %}
+							${{ "{:,}".format(district.total_local_dollars) }}
+						{% else %}
+							Not available
+						{% endif %}
+					</td>
+					<td class='align-right'>
+						{% if district.percent_local_dollars %}
+							{{ "{:.1%}".format(district.percent_local_dollars) }}
+						{% else %}
+							Not available
+						{% endif %}
+					</td>
+				</tr>
+			{%- endfor -%}
+		</tbody>
+	</table>
+</div>
 {% endblock content %}
 
 {% block library_scripts %}
 {# Uncomment this if you are using libraries such as jQuery #}
-{# <script src="//{{ ROOT_URL }}/js/vendor.min.js"></script> #}
+<script src="//{{ ROOT_URL }}/js/vendor.min.js"></script>
 {% endblock %}
 
 {% block scripts %}
 {# Uncomment this if you are using custom JavaScript #}
-{# <script src="//{{ ROOT_URL }}/js/app.min.js"></script> #}
+<script src="//{{ ROOT_URL }}/js/app.min.js"></script>
 <script>
 (function(document) {
+	var $ = require('jquery');
+	var dt = require( 'datatables.net' )( window, $ );
+
+	window.ROOT_URL = "{{ ROOT_URL }}";
+	window.x_label = "{{ x_label }}";
+	window.x_series = "{{ x_series }}";
+	window.y_label = "{{ y_label }}";
+	window.y_series = "{{ y_series }}";
+	window.countyGroups = {
+		{%- for county_group in ["north", 'chicagoArea', 'central', "south"] -%}
+			{{ county_group }}:[
+				{%- for county in county_groups if county.group == county_group -%}
+				"{{ county.county }}" {% if not loop.last%},{% endif %}
+				{%- endfor -%}
+				]{% if not loop.last%},{% endif %}
+		{%- endfor -%}
+	};
+
   var CSS = [
+	"//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css",
+	"//cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css",
     "//{{ ROOT_URL }}/css/styles.css"
   ];
   CSS.forEach(function(url) {
@@ -27,6 +121,27 @@
     link.setAttribute('href', url);
     document.head.appendChild(link);
   });
+
+
+	var districtsLookup = $('#districts-lookup').DataTable({
+		"paging": true,
+		"searching": true,
+		"ordering": true,
+		"order": [[ 2, "desc" ]],
+		"bAutoWidth":false,
+		"responsive": {
+			details:{
+				type: 'column',
+				target: 'tr'
+		}, 
+		breakpoints: [
+			{ name: 'desktop', width: Infinity },
+			{ name: 'tablet',  width: 840 },
+			{ name: 'phone',   width: 420 }
+		],
+		}
+	});
+
 })(document);
 </script>
 {% endblock scripts %}

@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run downloadData && grunt",
     "watch": "grunt watch",
-    "downloadData":"node scripts/downloadCSV.js"
+    "downloadData": "node scripts/downloadCSV.js"
   },
   "repository": {
     "type": "git",
@@ -33,6 +33,12 @@
   },
   "tribune": {},
   "dependencies": {
-    "d3": "^4.3.0"
+    "d3": "^4.3.0",
+    "jquery": "^3.1.1",
+    "underscore": "^1.8.3",
+    "datatables.net": "^1.10.12",
+    "datatables.net-dt": "^1.10.12",
+    "datatables.net-responsive": "^2.1.0",
+    "datatables.net-responsive-dt": "^2.1.0"
   }
 }

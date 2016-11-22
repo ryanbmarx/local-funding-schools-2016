@@ -6,7 +6,11 @@ module.exports = function(grunt) {
   // You'll also have to install them using a command similar to:
   //     npm install --save jquery
   var VENDOR_LIBRARIES = [
-    'd3'
+    'd3',
+    'underscore',
+    'jquery',
+    'datatables.net',
+    'datatables.net-responsive'
   ];
 
   config.browserify = {
