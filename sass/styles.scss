@@ -1,2 +1,63 @@
 @import 'base-variables';
 @import 'base-mixins';
+@import 'trib-skeleton';
+
+.graphic-wrapper{
+	max-width: 800px;
+	margin:0 auto;
+}
+
+.scatter{
+	@include trib-chart();
+
+	&__container{
+		width:100%;
+		height:500px;
+		background:rgba(black, .1);
+	}	
+
+	&__label{
+		@include label6();
+	}
+}
+
+.scatter--small{
+	.scatter__container{
+		height:300px;
+	}	
+}
+
+
+.districts-lookup-label{
+	@include label4();
+}
+
+.districts-lookup{
+	@include trib-table();
+}
+
+.district{
+	td:first-child{
+		padding-left:5px;// font-weight: bold;
+	}		
+	td:last-child{
+		padding-right:5px;// font-weight: bold;
+	}		
+
+	&[data-county="cook"], 
+	&[data-county="lake"], 
+	&[data-county="mchenry"], 
+	&[data-county="kane"], 
+	&[data-county="will"], 
+	&[data-county="dupage"]{
+		background:rgba($trib_blue5, .25);
+	}
+	&__city{
+		font-style:italic;
+	}
+}
+
+
+.axis-label{
+	@include sans-serif-text(16px, 1.4em, bold);
+}
