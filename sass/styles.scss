@@ -1,4 +1,7 @@
 @import 'base-variables';
+
+$table_highlight:rgba($trib_blue5, .25);
+
 @import 'base-mixins';
 @import 'trib-skeleton';
 
@@ -27,6 +30,14 @@
 	}	
 }
 
+.districts-lookup-legend{
+	@include trib-legend();
+
+	dt span{
+		@include trib_legend__box(0);
+		background:$table_highlight;
+	}
+}
 
 .districts-lookup-label{
 	@include label4();
@@ -50,7 +61,7 @@
 	&[data-county="kane"], 
 	&[data-county="will"], 
 	&[data-county="dupage"]{
-		background:rgba($trib_blue5, .25);
+		background:$table_highlight;
 	}
 	&__city{
 		font-style:italic;
