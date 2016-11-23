@@ -10,17 +10,6 @@ function checkCountyGroup(county, groupToHighlight) {
 	return false
 }
 
-function getFillColor(d){
-	const chicagoArea = ['Cook', 'DuPage', 'Lake', 'McHenry', 'Will', 'Kane'];
-
-	let county = d.county;
-
-	if (chicagoArea.indexOf(county) > -1){
-		return 'blue';
-	}
-	return 'red';
-}
-
 function drawScatter(data, container, highlight){
 	// Log what the hell is going on.
 	console.log(`Putting a ${highlight} chart into ${container}`);
@@ -114,16 +103,8 @@ function drawScatter(data, container, highlight){
 		.append('circle')
 			.classed('scatter__district', true)
 			.attr('cx', d => x(parseFloat(d[window.x_series])))
-			.attr('cy', d => {
-				if(d[window.y_series] > -1){
-					// Some districts don't have this data. Can't delete them until diane says so.
-					return y(parseFloat(d[window.y_series]))
-				}
-				return 0;
-			})
+			.attr('cy', d => d[window.y_series] != "" ? y(parseFloat(d[window.y_series])) : 0)
 			.attr('r', 5)
-			// .style('fill', 'blue')
-			// .style('opacity', .3)
 			.attr('data-district', d => d.district_name)
 			.attr('data-county', d => d.county);
 
