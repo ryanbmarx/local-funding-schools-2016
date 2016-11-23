@@ -20,9 +20,9 @@ $table_highlight:rgba($trib_blue5, .25);
 		// background:rgba(black, .1);
 	}	
 
-	&__label{
+	.scatter__label{
 		@include label6();
-		margin-top:25px 0 7px 0;
+		margin:25px 0 7px 0;
 	}
 
 	&__map{
@@ -34,6 +34,11 @@ $table_highlight:rgba($trib_blue5, .25);
 
 	&__median-label{
 		@include sans-serif-text(16px, 1em);
+	}
+
+	&__district{
+		opacity:.25;
+		fill:$trib-blue2;
 	}
 }
 
