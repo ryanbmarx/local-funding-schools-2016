@@ -1,0 +1,27 @@
+// Make lookup label, pagination labeling sans-serif
+.dataTables_wrapper{
+
+	.dataTables_paginate.paging_simple_numbers,
+	.dataTables_length, 
+	.dataTables_info, 
+	.dataTables_filter{
+		@include sans-serif-text(14px, 1.3em, normal);
+	}
+}
+
+.dataTables_wrapper .dataTables_paginate {
+	
+	.paginate_button.current, .current.paginate_button:hover{
+		border:none;
+		background:$trib_blue2;
+		color:white !important;	
+		font-weight:bold;
+	}
+
+	.paginate_button:hover{
+		border:none;
+		background:$trib_blue5;
+		color:white;
+		font-weight:bold;
+	}
+}
