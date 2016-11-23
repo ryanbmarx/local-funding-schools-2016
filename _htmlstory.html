@@ -50,6 +50,7 @@
 (function(document) {
 	var $ = require('jquery');
 	var dt = require( 'datatables.net' )( window, $ );
+	var dr = require( 'datatables.net-responsive' )( window, $ );
 
 	window.ROOT_URL = "{{ ROOT_URL }}";
 	window.x_label = "{{ x_label }}";
@@ -85,17 +86,17 @@
 		"searching": true,
 		"ordering": true,
 		"order": [[ 2, "desc" ]],
-		"bAutoWidth":false,
+		// "bAutoWidth":false,
 		"responsive": {
 			details:{
 				type: 'column',
 				target: 'tr'
-		}, 
-		breakpoints: [
-			{ name: 'desktop', width: Infinity },
-			{ name: 'tablet',  width: 840 },
-			{ name: 'phone',   width: 420 }
-		],
+			}, 
+			breakpoints: [
+				{ name: 'desktop', width: Infinity },
+				{ name: 'tablet',  width: 840 },
+				{ name: 'phone',   width: 420 }
+			],
 		}
 	});
 
