@@ -30,6 +30,11 @@
 			</div>
 		</div>
 	</figure>
+	<p class="notes">Counties:&nbsp;
+	{%- for county in county_groups if county.group == chart.county_group -%}
+		{{ county.county }}{% if not loop.last %}, {% endif %}
+		{%- endfor -%}
+	</p>
 	{%- endfor -%}
 
 	{% include "_lookup-table.html" %}
