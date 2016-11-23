@@ -27,6 +27,13 @@ $table_highlight:rgba($trib_blue5, .25);
 
 	&__map{
 		width:100%;
+		max-width:200px;
+		display:block;
+		margin:0 auto 15px auto;
+	}
+
+	&__median-label{
+		@include sans-serif-text(16px, 1em);
 	}
 }
 
@@ -34,6 +41,10 @@ $table_highlight:rgba($trib_blue5, .25);
 	.scatter__container{
 		height:300px;
 	}	
+}
+
+.trb_mainContent .notes {
+	@include sans-serif-text(12px, 1.3em);
 }
 
 .districts-lookup-legend{
