@@ -11,9 +11,28 @@ $table_highlight:rgba($trib_blue5, .25);
 	margin:0 auto;
 }
 
+.trb_mainContent .story-link{
+	padding:15px;
+	background:$trib_blue5;
+    float: right;
+    max-width: 200px;
+    margin: 0 0 15px 25px;
+    border-left:2px solid $trib_blue2;
+
+	p{
+		@include sans-serif();
+		margin:0;
+		cursor:pointer;
+	}
+}
+
 .trb_mainContent .scatter{
 	@include trib-chart();
 	margin:0;
+	
+	figcaption p{
+		margin-top:0;
+	}
 
 	&__container{
 		width:100%;
@@ -24,9 +43,9 @@ $table_highlight:rgba($trib_blue5, .25);
 
 	.scatter__label{
 		@include label6();
-		margin:25px 0 7px 0;
+		margin:0 0 7px 0;
 	}
-
+	
 	&__map{
 		width:100%;
 		max-width:200px;
@@ -37,6 +56,10 @@ $table_highlight:rgba($trib_blue5, .25);
 	&__median-label{
 		@include sans-serif-text(16px, 1em);
 	}
+
+	&__county-label{
+		@include sans-serif-text(12px, 1em);
+	}	
 
 	&__district{
 		opacity:.25;
@@ -60,7 +83,10 @@ $table_highlight:rgba($trib_blue5, .25);
 }
 
 
-.scatter--small{
+.trb_mainContent .scatter--small{
+	margin:30px 0 0 0;
+	padding:35px 0 0 0;
+	border-top:1px solid $trib-gray4;
 	.scatter__container{
 		height:425px;
 	}	
@@ -164,6 +190,10 @@ $table_highlight:rgba($trib_blue5, .25);
 
 .axis-label{
 	@include sans-serif-text(16px, 1.4em, bold);
+}
+
+.trb_mainContent .credits p{
+	@include agate();
 }
 
 @media all and (max-width:700px){

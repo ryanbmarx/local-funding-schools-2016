@@ -7,10 +7,11 @@
  #}
 {% block content %}
 <div class='graphic-wrapper'>
-	{{ intro|markdown }}
 	<div class="story-link">
-		{{ story_link|markdown }}
+		<p><strong>{{story_link_intro}}:</strong><br /> <a href="{{ story_link }}" target="_blank">{{ story_link_text }}</p>
 	</div>
+	{{ intro|markdown }}
+
 	<figure class='scatter' >
 		<figcaption>
 			<p class='scatter__label'>{{ chart_label }}</p>	
@@ -94,7 +95,6 @@
 		{%- endfor -%}
 	};
 
-	console.log(countyGroups);
   var CSS = [
 	"//cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css",
 	"//cdn.datatables.net/responsive/2.1.0/css/responsive.dataTables.min.css",
