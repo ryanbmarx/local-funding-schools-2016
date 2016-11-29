@@ -1,6 +1,42 @@
 import * as d3 from "d3";
 import {filter} from 'underscore';
 import {debounce} from 'underscore';
+var initTable = require('./school-funding-table');
+
+// This array houses data used to place county labels on the chicago area chart. 
+// It's a bit of a hack since the same data points are used for several counties, 
+// but I just want them stacked.
+const chicagoarea_median_household_incomes = [
+	{
+		county:"Cook",
+		income:54828
+	},
+
+	{
+		county:"Dupage",
+		income:77873
+	},
+
+	{
+		county:"Lake",
+		income:77873
+	},
+
+	{
+		county:"McHenry",
+		income:77873
+	},
+
+	{
+		county:"Will",
+		income:77873
+	},
+
+	{
+		county:"Kane",
+		income:70514
+	}
+]
 
 function tooltip(hide, d){
 	if (hide == 'hide') {
@@ -104,11 +140,11 @@ function drawScatter(data, container, highlight){
     	.classed('axis-label', true)
     	.classed('axis-label--x', true)
     	.attr('x', innerWidth/2)
-    	.attr('y', (innerHeight + margin.top + 30))
+    	.attr('y', (innerHeight + margin.top))
     	.attr("text-anchor", "middle")
     	.text(window.x_label);
 
-
+    // Median illinois household income
 	const median_x = 59588;
 
 	scatterPlot.append('line')
@@ -118,7 +154,6 @@ function drawScatter(data, container, highlight){
 		.attr('x2', x(median_x))
 		.style('stroke', '#e0e0e0')
 		.style('stroke-width', 3)
-		// .style('stroke-dasharray', "5, 5");
 	
 	scatterPlot.append('text')
 			.classed('scatter__median-label', true)
@@ -179,10 +214,38 @@ function drawScatter(data, container, highlight){
 		.style('text-anchor', 'end')
 		.classed('scatter__median-label', true);
 	
+	if (highlight == "chicagoArea"){
+		chicagoarea_median_household_incomes.forEach((county, index)=>{
+		let dy = 0 - (18 * index) - 10,
+			xPos = x(county.income),
+			yPos = innerHeight;
+
+		scatterPlot.append('text')
+			.classed('scatter__county-label', true)
+			.text(`${county.county}`)
+			.attr('y',yPos)
+			.attr('x', xPos)
+			.attr('dy', `${dy}px`)
+			.style('text-anchor', 'middle')
+			.style('color', 'white')
+			.style('stroke', 'white')
+			.style('stroke-width', 3)
+			.style('opacity', .75);
+
+		scatterPlot.append('text')
+			.classed('scatter__county-label', true)
+			.text(`${county.county}`)
+			.attr('y',yPos)
+			.attr('x', xPos)
+			.attr('dy', `${dy}px`)
+			.style('text-anchor', 'middle');
+		})
+	}
 
 }
 
 window.onload = function(){
+	initTable();
 	// load the data
 	d3.csv(`http://${window.ROOT_URL}/data/schools-data.csv`, (err, data) => {
 		if (err) throw err;

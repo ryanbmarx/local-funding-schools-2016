@@ -8,7 +8,9 @@
 {% block content %}
 <div class='graphic-wrapper'>
 	{{ intro|markdown }}
-	
+	<div class="story-link">
+		{{ story_link|markdown }}
+	</div>
 	<figure class='scatter' >
 		<figcaption>
 			<p class='scatter__label'>{{ chart_label }}</p>	
@@ -20,7 +22,6 @@
 				</dl>
 		</figcaption>
 		<div class='scatter__container' data-highlight='all'></div>
-		<p class="notes">{{ cps_note }}</p>
 	</figure>
 	{%- for chart in charts -%}
 	<figure class='scatter scatter--small' >
@@ -44,13 +45,14 @@
 				<div class='scatter__container' data-highlight='{{ chart.county_group }}'></div>
 			</div>
 		</div>
-	</figure>
 	<p class="notes">Counties:&nbsp;
 	{%- for county in county_groups if county.group == chart.county_group -%}
 		{{ county.county }}{% if not loop.last %}, {% endif %}
 		{%- endfor -%}
 	</p>
+	</figure>
 	{%- endfor -%}
+	
 
 	{% include "_lookup-table.html" %}
 
@@ -73,9 +75,9 @@
 <script src="//{{ ROOT_URL }}/js/app.min.js"></script>
 <script>
 (function(document) {
-	var $ = require('jquery');
-	var dt = require( 'datatables.net' )( window, $ );
-	var dr = require( 'datatables.net-responsive' )( window, $ );
+	// var $ = require('jquery');
+	// var dt = require( 'datatables.net' )( window, $ );
+	// var dr = require( 'datatables.net-responsive' )( window, $ );
 
 	window.ROOT_URL = "{{ ROOT_URL }}";
 	window.x_label = "{{ x_label }}";
@@ -106,28 +108,43 @@
   });
 
 
-	var districtsLookup = $('#districts-lookup').DataTable({
-		"paging": true,
-		"searching": true,
-		"ordering": true,
-		"order": [[ 5, "asc" ]],
-		// "bAutoWidth":false,
-		"responsive": {
-			details:{
-				type: 'column',
-				target: 'tr'
-			}, 
-			breakpoints: [
-				{ name: 'desktop', width: Infinity },
-				{ name: 'tablet',  width: 840 },
-				{ name: 'phone',   width: 420 }
-			],
-			"columnDefs": [ 
-				{ "orderable": false, "targets": 0 }
-			]
-		}
-	});
-
+	// var districtsLookup = $('#districts-lookup').DataTable({
+	// 	"paging": true,
+	// 	"searching": true,
+	// 	"ordering": true,
+	// 	"order": [[ 5, "asc" ]],
+	// 	// "bAutoWidth":false,
+	// 	"responsive": {
+	// 		details:{
+	// 			type: 'column',
+	// 			target: 'tr'
+	// 		}, 
+	// 		breakpoints: [
+	// 			{ name: 'desktop', width: Infinity },
+	// 			{ name: 'tablet',  width: 840 },
+	// 			{ name: 'phone',   width: 420 }
+	// 		],
+	// 		"columnDefs": [ 
+	// 			{ "orderable": false, "targets": 0 }
+	// 		]
+	// 	}
+	// });
+	// function getParameterByName(name, url) {
+	//     if (!url) {
+	//       url = window.location.href;
+	//     }
+	//     name = name.replace(/[\[\]]/g, "\\$&");
+	//     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+	//         results = regex.exec(url);
+	//     if (!results) return null;
+	//     if (!results[2]) return '';
+	//     return decodeURIComponent(results[2].replace(/\+/g, " "));
+	// }
+	// window.onload = function(){
+	// 	let searchValue = getParameterByName('search');
+	// 	console.log(searchValue);
+	// 	districtsLookup.search(searchValue).draw();
+	// }
 })(document);
 </script>
 {% endblock scripts %}
