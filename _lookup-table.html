@@ -1,55 +1,55 @@
-	<h2 class='districts-lookup-label'>Look up your district</h2>
-	{{ lookup_intro|markdown }}
-	<dl class='districts-lookup-legend'>
-		<dt>
-            <span class='trib-legend__box'></span>
-		</dt>
-		<dd>Chicago-area county</dd>
-	</dl>
-	<table id='districts-lookup' class='districts-lookup'>
-		<thead>
-			<tr>
-				<th class='control'></th>
-				<th>District<br /><em>City</em></th>
-				<th class='none'>City</th>
-				<th>County</th>
-				<th class='align-right'>Enrollment</th>
-				<th class='align-right'>Local revenue</th>
-				<th class='align-right all'>Percentage local <br />revenue</th>
+<h2 class='districts-lookup-label'>Look up your district</h2>
+{{ lookup_intro|markdown }}
+<dl class='districts-lookup-legend'>
+	<dt>
+        <span class='trib-legend__box'></span>
+	</dt>
+	<dd>Chicago-area county</dd>
+</dl>
+<table id='districts-lookup' class='districts-lookup'>
+	<thead>
+		<tr>
+			<th class='control'></th>
+			<th>District<br /><em>City</em></th>
+			<th class='none'>City</th>
+			<th>County</th>
+			<th class='align-right'>Enrollment</th>
+			<th class='align-right'>Local revenue</th>
+			<th class='align-right all'>Percentage local <br />revenue</th>
+		</tr>
+	</thead>
+	<tbody>
+		{%- for district in districts -%}
+			<tr class='district' data-county="{{ district.county|lower }}">
+				<td class='district__control'>w</td>
+				<td>
+					<span class='district__name'>{{ district.district_name }}</span> <br />
+					<span class='district__city'>{{ district.city }}</span>
+				</td>
+				<th>{{ district.city }}</th>
+				<td class='district__county'>{{ district.county }}</td>
+				<td class='align-right'>
+					{% if district.DISTRICT_TOTAL_ENROLLMENT %}
+						{{ "{:,}".format(district.DISTRICT_TOTAL_ENROLLMENT) }}
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
+				<td class='align-right'>
+					{% if district.total_local_dollars %}
+						${{ "{:,}".format(district.total_local_dollars) }}
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
+				<td class='align-right'>
+					{% if district.percent_local_dollars %}
+						{{ "{:.1%}".format(district.percent_local_dollars) }}
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
 			</tr>
-		</thead>
-		<tbody>
-			{%- for district in districts -%}
-				<tr class='district' data-county="{{ district.county|lower }}">
-					<td class='district__control'>w</td>
-					<td>
-						<span class='district__name'>{{ district.district_name }}</span> <br />
-						<span class='district__city'>{{ district.city }}</span>
-					</td>
-					<th>{{ district.city }}</th>
-					<td class='district__county'>{{ district.county }}</td>
-					<td class='align-right'>
-						{% if district.DISTRICT_TOTAL_ENROLLMENT %}
-							{{ "{:,}".format(district.DISTRICT_TOTAL_ENROLLMENT) }}
-						{% else %}
-							Not available
-						{% endif %}
-					</td>
-					<td class='align-right'>
-						{% if district.total_local_dollars %}
-							${{ "{:,}".format(district.total_local_dollars) }}
-						{% else %}
-							Not available
-						{% endif %}
-					</td>
-					<td class='align-right'>
-						{% if district.percent_local_dollars %}
-							{{ "{:.1%}".format(district.percent_local_dollars) }}
-						{% else %}
-							Not available
-						{% endif %}
-					</td>
-				</tr>
-			{%- endfor -%}
-		</tbody>
-	</table>
+		{%- endfor -%}
+	</tbody>
+</table>
