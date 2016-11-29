@@ -54,6 +54,11 @@
 
 	{% include "_lookup-table.html" %}
 
+	<div class='credits'>
+		{{ notes|markdown }}
+		{{ sources|markdown }}
+		{{ credits|markdown }}
+	</div>
 
 </div>
 {% endblock content %}
@@ -105,7 +110,7 @@
 		"paging": true,
 		"searching": true,
 		"ordering": true,
-		"order": [[ 5, "desc" ]],
+		"order": [[ 5, "asc" ]],
 		// "bAutoWidth":false,
 		"responsive": {
 			details:{
