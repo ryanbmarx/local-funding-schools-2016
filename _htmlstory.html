@@ -12,17 +12,32 @@
 	<figure class='scatter' >
 		<figcaption>
 			<p class='scatter__label'>{{ chart_label }}</p>	
+				<dl class='scatter__legend'>
+					<dt>
+						<span class='trib-legend__circle'></span>
+					</dt>
+					<dd>One school district</dd>
+				</dl>
 		</figcaption>
 		<div class='scatter__container' data-highlight='all'></div>
+		<p class="notes">{{ cps_note }}</p>
 	</figure>
 	{%- for chart in charts -%}
 	<figure class='scatter scatter--small' >
 		<figcaption>
 			<p class='scatter__label'>{{ chart.chart_label }}</p>	
-			{{ chart.blurb|markdown }}
+			{% if chart.blurb %}
+				{{ chart.blurb|markdown }}
+			{% endif %}
 		</figcaption>
 		<div class='row'>
 			<div class='three columns'>
+				<p class='map-label'>Median household income</p>
+				<div class='map-legend'>
+					<p class='map-legend__label map-legend__label--lower'>Lower</p>
+					<p class='map-legend__label map-legend__label--higher'>Higher</p>
+					{# <div class='map-legend__bar'></div> #}
+				</div>
 				<img class='scatter__map' src='http://{{ ROOT_URL }}/img/{{ chart.county_group }}.png' alt="Map of Illinois' {{ chart.county_group }} counties"  />
 			</div>
 			<div class='nine columns'>
@@ -90,7 +105,7 @@
 		"paging": true,
 		"searching": true,
 		"ordering": true,
-		"order": [[ 2, "desc" ]],
+		"order": [[ 5, "desc" ]],
 		// "bAutoWidth":false,
 		"responsive": {
 			details:{
@@ -102,6 +117,9 @@
 				{ name: 'tablet',  width: 840 },
 				{ name: 'phone',   width: 420 }
 			],
+			"columnDefs": [ 
+				{ "orderable": false, "targets": 0 }
+			]
 		}
 	});
 
