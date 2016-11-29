@@ -2,6 +2,13 @@ import * as d3 from "d3";
 import {filter} from 'underscore';
 import {debounce} from 'underscore';
 
+function tooltip(hide, d){
+	if (hide == 'hide') {
+		d3.select('.tooltip').remove()
+	} else {
+		console.log(d);
+	}
+}
 
 function checkCountyGroup(county, groupToHighlight) {
 	if (window.countyGroups[groupToHighlight].indexOf(county.toLowerCase()) > -1){
@@ -32,7 +39,7 @@ function drawScatter(data, container, highlight){
 	const 	bbox = d3.select(container).node().getBoundingClientRect();
 	const 	height = bbox.height,
 			width = bbox.width,
-			margin = {top:15, right:15, bottom:50, left:60},
+			margin = {top:50, right:15, bottom:50, left:60},
 			innerHeight = height - margin.top - margin.left,
 			innerWidth = width - margin.left - margin.right;
 	// Get our basic chart container in order.
@@ -48,8 +55,10 @@ function drawScatter(data, container, highlight){
 	
 	// Make our scales
 	const xMax = d3.max(data, d => parseFloat(d[window.x_series]));
+	const xMin = d3.min(data, d => parseFloat(d[window.x_series]));
+
 	const x = d3.scaleLinear()
-		.domain([0, xMax])
+		.domain([xMin, xMax])
 		.range([0, innerWidth]);
 
 	const y = d3.scaleLinear()
@@ -82,6 +91,8 @@ function drawScatter(data, container, highlight){
 
 	// Now with the X
 	const xScale = d3.axisBottom(x)
+		.ticks(5, "($,f");
+
 	scatterPlot.append("g")
     	.classed('x', true)
     	.classed('axis', true)
@@ -97,6 +108,30 @@ function drawScatter(data, container, highlight){
     	.attr("text-anchor", "middle")
     	.text(window.x_label);
 
+
+	const median_x = 59588;
+
+	scatterPlot.append('line')
+		.attr('y1',0)
+		.attr('x1', x(median_x))
+		.attr('y2', innerHeight)
+		.attr('x2', x(median_x))
+		.style('stroke', '#e0e0e0')
+		.style('stroke-width', 3)
+		// .style('stroke-dasharray', "5, 5");
+	
+	scatterPlot.append('text')
+			.classed('scatter__median-label', true)
+			.text(`Illinois median income: ${d3.format("($,")(median_x)}`)
+			.attr('y',0)
+			.attr('x', x(median_x))
+			.attr('dy', '-.4em')
+			.attr('text-anchor', 'middle')
+
+	scatterPlot.append('polygon')
+		.attr('points',`${x(median_x)},7 ${x(median_x) + 5},-2  ${x(median_x) - 5},-2  ${x(median_x)},7`)
+		.style('fill', '#888888');
+
 	scatterPlot.selectAll('circle')
 		.data(filteredData)
 		.enter()
@@ -107,6 +142,8 @@ function drawScatter(data, container, highlight){
 			.attr('r', 5)
 			.attr('data-district', d => d.district_name)
 			.attr('data-county', d => d.county);
+			// .on('mouseover', tooltip('show', this))
+			// .on('mouseout', tooltip('hide', this));
 
 	// DRAW A LINE FOR THE MEDIAN
 	const median_y = d3.median(filteredData, d => d[window.y_series]);
@@ -123,18 +160,31 @@ function drawScatter(data, container, highlight){
 	// Label the median line
 
 	scatterPlot.append('text')
-		.text(`Median: ${d3.format('.1%')(median_y)}`)
+		.text(`Median: ${d3.format('.0%')(median_y)} local funding`)
+		.attr('y',y(median_y))
+		.attr('x', innerWidth)
+		.attr('dy', '-.3em')
+		.style('text-anchor', 'end')
+		.style('color', 'white')
+		.style('stroke', 'white')
+		.style('stroke-width', 3)
+		.style('opacity', .75)
+		.classed('scatter__median-label', true);
+
+	scatterPlot.append('text')
+		.text(`Median: ${d3.format('.0%')(median_y)} local funding`)
 		.attr('y',y(median_y))
 		.attr('x', innerWidth)
 		.attr('dy', '-.3em')
 		.style('text-anchor', 'end')
 		.classed('scatter__median-label', true);
+	
 
 }
 
 window.onload = function(){
 	// load the data
-	d3.csv(`http://${window.ROOT_URL}/data.csv`, (err, data) => {
+	d3.csv(`http://${window.ROOT_URL}/data/schools-data.csv`, (err, data) => {
 		if (err) throw err;
 		let containers = document.querySelectorAll('.scatter__container');
 		
