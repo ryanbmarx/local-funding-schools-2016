@@ -13,10 +13,12 @@ $table_highlight:rgba($trib_blue5, .25);
 
 .trb_mainContent .scatter{
 	@include trib-chart();
+	margin:0;
 
 	&__container{
 		width:100%;
-		height:500px;
+		height:450px !important;
+		position:relative;
 		// background:rgba(black, .1);
 	}	
 
@@ -39,18 +41,69 @@ $table_highlight:rgba($trib_blue5, .25);
 	&__district{
 		opacity:.25;
 		fill:$trib-blue2;
+
+		// &:hover{
+		// 	opacity:1;
+		// 	stroke:black;
+		// 	stroke-width:2;
+		// }
+	}
+
+	&__legend{
+		@include trib-legend();
+
+		span{
+			@include trib_legend__box('circle');
+			background:rgba($trib_blue2, .25);
+		}
 	}
 }
 
+
 .scatter--small{
 	.scatter__container{
-		height:300px;
+		height:425px;
 	}	
 }
 
 .trb_mainContent .notes {
 	@include sans-serif-text(12px, 1.3em);
+	margin:0;
 }
+
+
+.trb_mainContent {
+
+	.map-label{
+		@include label7();
+		margin: 0 0 7px 0;
+	}
+
+	.map-legend{
+		width:100%;
+		height:25px;
+		display:flex;
+		justify-content:space-between;
+		align-items:center;
+		background: linear-gradient(to right, #ffffff 0%,#08306b 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+		border:1px solid $trib-gray4;
+
+		.map-legend__label{
+			@include agate();
+			margin:0;
+			padding:0 5px;
+			font-weight: bold;
+			display:inline;
+
+			&--higher{
+				color:white;
+			}
+		}
+	}
+}
+
+
+
 
 .districts-lookup-legend{
 	@include trib-legend();
@@ -67,6 +120,7 @@ $table_highlight:rgba($trib_blue5, .25);
 
 .districts-lookup{
 	@include trib-table();
+	width:100% !important;
 }
 
 .district{
@@ -91,6 +145,39 @@ $table_highlight:rgba($trib_blue5, .25);
 }
 
 
+.district{
+	.district__control{
+		font-family: trb_Icons;
+		font-size: 14px;
+		line-height: 1em;
+		margin: 0;
+		padding: 0;
+		transition:all 250ms;
+	}
+
+	&.parent .district__control{
+		transform: rotate(90deg);
+		transition:all 250ms;
+	}
+}
+
+
 .axis-label{
 	@include sans-serif-text(16px, 1.4em, bold);
+}
+
+@media all and (max-width:700px){
+	.trb_mainContent{
+		.scatter__map, .map-label, .map-legend{
+			display: none;
+		}
+	}
+}
+
+@media all and (max-width:420px){
+	.trb_mainContent{
+		.scatter__label{
+			font-size:20px;
+		}
+	}
 }
