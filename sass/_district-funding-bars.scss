@@ -1,0 +1,42 @@
+$local_color: $trib_blue2;
+$state_color: $trib_blue4;
+$federal_color: $trib_gray4;
+
+$bar-chart-height: 25px;
+$bar-chart-max-width:280px;
+
+.bar-wrapper{
+	@include clearfix();
+	width:100%;
+	max-width:$bar-chart-max-width;
+	height:$bar-chart-height;	
+}
+
+
+.bar{
+	@include sans-serif-text(12px, 1em, bold);
+	display:flex;
+	align-items:center;
+	height:100%;
+	float:left;
+
+	&--local{
+		background: $local_color;
+		justify-content:flex-end;
+		span{
+			padding-right:5px;
+			color:white;
+		}
+	}
+	&--state{
+		background: $state_color;
+		justify-content:flex-start;
+		span{
+			padding-left:5px;
+			color:black;
+		}
+	}
+	&--federal{
+		background: $federal_color;
+	}
+}

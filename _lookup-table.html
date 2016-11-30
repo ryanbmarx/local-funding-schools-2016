@@ -14,8 +14,11 @@
 			<th class='none'>City</th>
 			<th>County</th>
 			<th class='align-right'>Enrollment</th>
-			<th class='align-right'>Local revenue</th>
-			<th class='align-right all'>Percentage local <br />revenue</th>
+			<th>Funding by source<br /><em>Local funding noted</em></th>
+			<th class='align-right none'>Local revenue ($)</th>
+			<th class='align-right none'>Local revenue (%)</th>
+			<th class='align-right none'>State revenue ($)</th>
+			<th class='align-right none'>State revenue (%)</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,6 +38,25 @@
 						Not available
 					{% endif %}
 				</td>
+				<td data-order={{ district.percent_local_dollars }}>
+					{% if district.percent_local_dollars and district.percent_state_dollars and district.percent_federal_dollars %}
+					<div class='bar-wrapper'>
+						<div class='bar bar--local' style='width:{{ district.percent_local_dollars*100 }}%'>
+							{% if district.percent_local_dollars >= 0.50 %}
+								<span>{{ "{:.1%}".format(district.percent_local_dollars) }}</span>
+							{% endif %}
+						</div>
+						<div class='bar bar--state' style='width:{{ district.percent_state_dollars*100 }}%'>
+							{% if district.percent_local_dollars < 0.50 %}
+								<small>&#9664;&nbsp;</small> {{ "{:.1%}".format(district.percent_local_dollars) }}
+							{% endif %}
+						</div>
+						<div class='bar bar--federal' style='width:{{ district.percent_federal_dollars*100 }}%'></div>
+					</div>
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
 				<td class='align-right'>
 					{% if district.total_local_dollars %}
 						${{ "{:,}".format(district.total_local_dollars) }}
@@ -45,6 +67,17 @@
 				<td class='align-right'>
 					{% if district.percent_local_dollars %}
 						{{ "{:.1%}".format(district.percent_local_dollars) }}
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
+				<td class='align-right'>
+					state dollars TK
+				</td>
+				<td class='align-right'>
+					{% if district.percent_state_dollars %}
+						{# {{ "{:.1%}".format(district.percent_state_dollars) }} #}
+						{{ district.percent_state_dollars }}
 					{% else %}
 						Not available
 					{% endif %}
