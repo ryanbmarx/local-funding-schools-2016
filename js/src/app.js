@@ -176,9 +176,10 @@ function drawScatter(data, container, highlight){
 			.attr('cy', d => d[window.y_series] != "" ? y(parseFloat(d[window.y_series])) : 0)
 			.attr('r', 5)
 			.attr('data-district', d => d.district_name)
-			.attr('data-county', d => d.county);
-			// .on('mouseover', tooltip('show', this))
-			// .on('mouseout', tooltip('hide', this));
+			.attr('data-county', d => d.county)
+			.attr('data-district-id', d => d.app_unique)
+			.on('mouseover', d => tooltip('show', d))
+			.on('mouseout', d => tooltip('hide', d));
 
 	// DRAW A LINE FOR THE MEDIAN
 	const median_y = d3.median(filteredData, d => d[window.y_series]);
