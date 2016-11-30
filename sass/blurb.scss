@@ -1,0 +1,46 @@
+@import 'base-variables';
+$chart-width:280px;
+@import 'base-mixins';
+
+html{background:#aaa}
+
+.graphic-wrapper{
+	@include clearfix();
+	height:350px;
+	background:white;
+}
+
+.year-chart{
+	@include trib-chart();
+	height:inherit;
+	background:yellow;
+	width:100%;
+	max-width: $chart-width;
+	float:left;
+
+	figcaption{
+		@include label7();
+	}
+}
+
+.districts-search{
+
+	margin-left: $chart-width + 25px;
+	background:rgba(green, .2);
+	text-align: center;
+
+	#search-box{
+		font-size:18px;
+		padding:15px;
+		width:80%;
+		display:block;
+		margin:15px auto;
+	}
+
+	input[type='submit']{
+		font-size:18px;
+		padding:15px;
+		display:block;
+		margin:15px auto;
+	}
+}
