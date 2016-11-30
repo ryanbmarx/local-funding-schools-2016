@@ -23,7 +23,7 @@
 
 {% block library_scripts %}
 {# Uncomment this if you are using libraries such as jQuery #}
-<script src="//{{ ROOT_URL }}/js/vendor.min.js"></script>
+{# <script src="//{{ ROOT_URL }}/js/vendor.min.js"></script> #}
 {% endblock %}
 
 {% block scripts %}
@@ -31,10 +31,7 @@
 {# <script src="//{{ ROOT_URL }}/js/blurb.min.js"></script> #}
 <script>
 
-var $ = require('jquery');
-
 (function(document) {
-	
   var CSS = [
     "//{{ ROOT_URL }}/css/blurb.css"
   ];
@@ -55,6 +52,5 @@ window.onload = function(){
 		// return false
 	})
 }
-
 </script>
 {% endblock scripts %}
