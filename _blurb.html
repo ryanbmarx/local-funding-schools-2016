@@ -12,11 +12,14 @@
 			chart label here
 		</figcaption>
 	</figure>
-	<form class='districts-search'>
-		  Enter your Name <br />
-		  <input id="search-box" type="text" name="search" text="Town or district name"><br />
-		  <input type='submit' value = "Search" />
-	  </form>
+	<div class='districts-search-wrapper'>
+		<form class='districts-search'>
+			  <h1 class='districts-search__header'>Search for your district</h1>
+			  <p  class='districts-search__note'>Will open in new page</p>
+			  <input id="search-box" type="text" name="search" text="Town or district name">
+			  <input type='submit' value = "Search" />
+		  </form>
+	  </div>
 </div>
 {% endblock content %}
 
