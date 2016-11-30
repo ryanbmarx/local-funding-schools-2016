@@ -10,7 +10,8 @@ module.exports = function(grunt) {
     'underscore',
     'jquery',
     'datatables.net',
-    'datatables.net-responsive'
+    'datatables.net-responsive',
+    'd3-tip'
   ];
 
   config.browserify = {

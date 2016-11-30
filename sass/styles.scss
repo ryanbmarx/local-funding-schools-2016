@@ -66,12 +66,13 @@ $table_highlight:rgba($trib_blue5, .25);
 	&__district{
 		opacity:.25;
 		fill:$trib-blue2;
+		cursor:pointer;
 
-		// &:hover{
-		// 	opacity:1;
-		// 	stroke:black;
-		// 	stroke-width:2;
-		// }
+		&:hover{
+			opacity:1;
+			stroke:black;
+			stroke-width:2;
+		}
 	}
 
 	&__legend{
@@ -213,6 +214,13 @@ $table_highlight:rgba($trib_blue5, .25);
 
 .axis-label{
 	@include sans-serif-text(16px, 1.4em, bold);
+}
+
+.tooltip{
+	@include agate();
+	background:rgba(black, .75);
+	color:white;
+	padding:10px;
 }
 
 .trb_mainContent .credits p{

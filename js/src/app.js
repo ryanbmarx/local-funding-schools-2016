@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import {filter} from 'underscore';
 import {debounce} from 'underscore';
+var d3tip = require('d3-tip');
 var initTable = require('./school-funding-table');
 
 // This array houses data used to place county labels on the chicago area chart. 
@@ -38,13 +39,13 @@ const chicagoarea_median_household_incomes = [
 	}
 ]
 
-function tooltip(hide, d){
-	if (hide == 'hide') {
-		d3.select('.tooltip').remove()
-	} else {
-		console.log(d);
-	}
-}
+// function tooltip(hide, d){
+// 	if (hide == 'hide') {
+// 		d3.select('.tooltip').remove()
+// 	} else {
+// 		console.log(d);
+// 	}
+// }
 
 function checkCountyGroup(county, groupToHighlight) {
 	if (window.countyGroups[groupToHighlight].indexOf(county.toLowerCase()) > -1){
@@ -67,6 +68,19 @@ function drawScatter(data, container, highlight){
 			return checkCountyGroup(district.county, highlight)
 		})
 	}
+
+	// Initialize the tooltip using d3-tip
+	const tip = d3tip()
+		.attr('class', 'tooltip')
+		.html(function(d) { 
+			return `
+			<strong>${d.SCHOOL_NAME}</strong><br />
+			${d.county} County<br />
+			<strong>Local funding:</strong> ${d3.format(".1%")(d[window.y_series])}<br />
+			<strong>Median household income:</strong> ${d3.format("($,")(d[window.x_series])}
+			`; 
+		});
+
 
 	d3.select(container).selectAll('*').remove();
 
@@ -167,6 +181,7 @@ function drawScatter(data, container, highlight){
 		.attr('points',`${x(median_x)},7 ${x(median_x) + 5},-2  ${x(median_x) - 5},-2  ${x(median_x)},7`)
 		.style('fill', '#888888');
 
+	scatterPlot.call(tip);
 	scatterPlot.selectAll('circle')
 		.data(filteredData)
 		.enter()
@@ -178,8 +193,8 @@ function drawScatter(data, container, highlight){
 			.attr('data-district', d => d.district_name)
 			.attr('data-county', d => d.county)
 			.attr('data-district-id', d => d.app_unique)
-			.on('mouseover', d => tooltip('show', d))
-			.on('mouseout', d => tooltip('hide', d));
+			.on('mouseover', tip.show)
+			.on('mouseout', tip.hide);
 
 	// DRAW A LINE FOR THE MEDIAN
 	const median_y = d3.median(filteredData, d => d[window.y_series]);
