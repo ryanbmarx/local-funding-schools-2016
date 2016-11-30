@@ -230,7 +230,8 @@ function drawScatter(data, container, highlight){
 			.style('color', 'white')
 			.style('stroke', 'white')
 			.style('stroke-width', 3)
-			.style('opacity', .75);
+			.style('opacity', .75)
+			.style('font-weight', "bold");
 
 		scatterPlot.append('text')
 			.classed('scatter__county-label', true)
@@ -238,7 +239,8 @@ function drawScatter(data, container, highlight){
 			.attr('y',yPos)
 			.attr('x', xPos)
 			.attr('dy', `${dy}px`)
-			.style('text-anchor', 'middle');
+			.style('text-anchor', 'middle')
+			.style('font-weight', "bold");
 		})
 	}
 
