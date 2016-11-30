@@ -1,113 +1,121 @@
 @import 'base-variables';
-$chart-width:200px;
-$chart-height:375px;
-@import 'base-mixins';
+$form-height:250px;
+$chart-height:300px;
+$chart-margin-bottom: 10px;
 
-html{background:#aaa}
+@import 'base-mixins';
 
 .graphic-wrapper{
 	@include clearfix();
-	background:lightyellow;
-	height:$chart-height;
+	height:$chart-height + $chart-margin-bottom + $form-height;
+	max-width:320px;
+	overflow:hidden;
+	background:rgba(green, .2);
 
 }
 
+
 .year-chart{
 	@include trib-chart();
+	margin: 0 0 $chart-margin-bottom 0;
 	height:$chart-height;
-	width:100%;
-	max-width: $chart-width;
-	float:left;
 
 	figcaption{
 		@include label7();
 	}
 
-	#g-school-funding-by-year-mobile{display:none;}
 	.g-artboard{
 		margin:0;
 	}
 }
 .districts-search-wrapper{
-	margin-left: $chart-width + 25px;
-	height:$chart-height;
-	display:flex;
-    align-items: center;
-    justify-content: center;
-    background: url(../img/local-school-funding-thumbnail.jpg) no-repeat center bottom;
-    background-size: cover;
-    position: relative;
-    
+
+ position: relative;
+ height: $form-height;
+ border: 1px solid #e0e0e0;
+ background:rgba($trib-gray4, .95);
+ width:99%;
+ width:calc(100% - 2px);
 }
 
 .districts-search{
-	background:rgba($trib-gray4, .95);
-    text-align: center;
-    border: 1px solid #e0e0e0;
-    width: 90%;
-    /* width: calc(100% - 2px); */
-    // height: 200px;
-    padding: 25px 0;
+	display:block;
+	text-align: center;    
+	padding: 0;
+	margin:15px 0 0 0;
+	width:100%;
 
-    &__header{
-    	@include label6();
-    	margin:0;
-    }
+	&__header{
+		@include label6();
+		margin:0;
+		line-height: 1em;
+	}
 
-    &__note{
-    	@include sans-serif();
-    	font-style:italic;
-    	margin:7px 0 0 0;
-    }
+	&__note{
+		@include sans-serif();
+		font-style:italic;
+		margin:7px 0 0 0;
+	}
 
 	#search-box{
 		font-size:18px;
-		padding:15px;
-		width:80%;
+		padding:15px 5px;
+		width:90%;
 		display:block;
 		margin:15px auto;
 		box-shadow: 2px 2px 6px rgba(black, .2);
 		border: none;
 		border-radius:3px;
 	}
+}
 
-	input[type='submit']{
-	    font-size: 14px;
-	    font-weight: bold;
-	    color:white;
-	    line-height:1em;
-	    padding: 15px;
-	    margin: 0 auto;
-	    border: none;
-	    background: $trib_blue2;
-	    opacity:.75;
-	    border-radius: 3px;
-	    transition: all 200ms;
-	    cursor:pointer;
-	    &:hover{
-	    	opacity:1;
-			transition: all 200ms;
-	    }
+.submit-button{
+	@include agate();
+	font-size: 14px;
+	font-weight: bold;
+	color:white;
+	line-height:1em;
+	padding: 15px;
+	margin: 0 auto;
+	border: none;
+	background: $trib_blue2;
+	opacity:.75;
+	border-radius: 3px;
+	transition: all 200ms;
+	cursor:pointer;
+	text-decoration: none;
+
+	&:hover{
+		opacity:1;
+		text-decoration: none;
+		transition: all 200ms;
 	}
 }
 
-@media all and (max-width:450px){
-	.districts-search-wrapper{background:rgba($trib-gray4, .95);}
-	.districts-search{
-		width:99%;
-		width:calc(100% - 2px);
+.districts-search--mini {
+	display:none;
+	align-items: center;
+	align-content: center;
+	justify-content: center;
+	flex-wrap:wrap; 
+
+	text-align:center;
+	height: 100%;
+
+	.districts-search__header{
+		width:100%;
 	}
+
+	.submit-button{
+		padding: 15px 0;
+		width: 90%;
+		margin: 10px 0 0 0;
+	}
+
+
 }
 
-
-@media all and (max-width:370px){
-	.graphic-wrapper{height:$chart-height * 2;}
-	.districts-search-wrapper{margin-left: 0;}
-	.year-chart{
-		float:none;
-		.g-artboard{margin:0 auto;}
-		#g-school-funding-by-year-mobile{display:block;}
-		#g-school-funding-by-year-desktop{display:none;}
-	}
-	
+@media all and (max-width:250px){
+	.districts-search {display:none}
+	.districts-search--mini {display:flex;}
 }
