@@ -1,11 +1,34 @@
 <h2 class='districts-lookup-label'>Look up your district</h2>
 {{ lookup_intro|markdown }}
-<dl class='districts-lookup-legend'>
-	<dt>
-        <span class='trib-legend__box'></span>
-	</dt>
-	<dd>Chicago-area county</dd>
-</dl>
+<div class='row'>
+	<div class='three columns'>
+		<h3 class='districts-lookup-legend__label'>Location</h3>
+		<dl class='districts-lookup-legend--table'>
+			<dt>
+				<span class='trib-legend__box trib-legend__box--local-district'></span>
+			</dt>
+			<dd>Chicago-area county</dd>
+		</dl>
+	</div>
+	<div class='nine columns'>
+		<h3 class='districts-lookup-legend__label'>Percentage of funding by source</h3>
+		<dl class='districts-lookup-legend--funding'>
+			<dt>
+				<span class='trib-legend__box trib-legend__box--local-money'></span>
+			</dt>
+			<dd>Local</dd>
+			<dt>
+				<span class='trib-legend__box trib-legend__box--state-money'></span>
+			</dt>
+			<dd>State</dd>
+			<dt>
+				<span class='trib-legend__box trib-legend__box--federal-money'></span>
+			</dt>
+			<dd>Federal</dd>
+		</dl>
+	</div>
+</div>
+
 <table id='districts-lookup' class='districts-lookup'>
 	<thead>
 		<tr>

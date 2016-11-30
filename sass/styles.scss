@@ -130,14 +130,35 @@ $table_highlight:rgba($trib_blue5, .25);
 }
 
 
+.districts-lookup-legend__label{
+	@include sans-serif-text(16px, 1.3em, bold);
+}
 
 
-.districts-lookup-legend{
+.districts-lookup-legend--table{
 	@include trib-legend();
 
 	dt span{
 		@include trib_legend__box(0);
 		background:$table_highlight;
+	}
+}
+
+
+.districts-lookup-legend--funding{
+	@include trib-legend('inline');
+
+	.trib-legend__box--local-money{
+		@include trib_legend__box(0);
+		background:$local_color;
+	}
+	.trib-legend__box--state-money{
+		@include trib_legend__box(0);
+		background:$state_color;
+	}
+	.trib-legend__box--federal-money{
+		@include trib_legend__box(0);
+		background:$federal_color;
 	}
 }
 
