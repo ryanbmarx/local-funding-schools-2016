@@ -1,5 +1,5 @@
 @import 'base-variables';
-$chart-width:280px;
+$chart-width:200px;
 $chart-height:375px;
 @import 'base-mixins';
 
@@ -7,8 +7,9 @@ html{background:#aaa}
 
 .graphic-wrapper{
 	@include clearfix();
+	background:lightyellow;
 	height:$chart-height;
-	background:white;
+
 }
 
 .year-chart{
@@ -20,6 +21,11 @@ html{background:#aaa}
 
 	figcaption{
 		@include label7();
+	}
+
+	#g-school-funding-by-year-mobile{display:none;}
+	.g-artboard{
+		margin:0;
 	}
 }
 .districts-search-wrapper{
@@ -40,7 +46,7 @@ html{background:#aaa}
     border: 1px solid #e0e0e0;
     width: 90%;
     /* width: calc(100% - 2px); */
-    height: 200px;
+    // height: 200px;
     padding: 25px 0;
 
     &__header{
@@ -71,7 +77,7 @@ html{background:#aaa}
 	    color:white;
 	    line-height:1em;
 	    padding: 15px;
-	    margin: 15px auto;
+	    margin: 0 auto;
 	    border: none;
 	    background: $trib_blue2;
 	    opacity:.75;
@@ -83,4 +89,25 @@ html{background:#aaa}
 			transition: all 200ms;
 	    }
 	}
+}
+
+@media all and (max-width:450px){
+	.districts-search-wrapper{background:rgba($trib-gray4, .95);}
+	.districts-search{
+		width:99%;
+		width:calc(100% - 2px);
+	}
+}
+
+
+@media all and (max-width:370px){
+	.graphic-wrapper{height:$chart-height * 2;}
+	.districts-search-wrapper{margin-left: 0;}
+	.year-chart{
+		float:none;
+		.g-artboard{margin:0 auto;}
+		#g-school-funding-by-year-mobile{display:block;}
+		#g-school-funding-by-year-desktop{display:none;}
+	}
+	
 }
