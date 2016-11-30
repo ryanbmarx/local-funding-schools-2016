@@ -17,6 +17,7 @@ function getParameterByName(name, url) {
 function initTable(){
 	var districtsLookup = $('#districts-lookup').DataTable({
 		"paging": true,
+		"lengthMenu": [[ 10, 25, 50, 75, 100, -1 ], [ 10, 25, 50, 75, 100, "All" ]],
 		"searching": true,
 		"ordering": true,
 		"order": [[ 5, "asc" ]],
