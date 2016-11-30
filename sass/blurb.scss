@@ -10,7 +10,7 @@ $chart-margin-bottom: 10px;
 	height:$chart-height + $chart-margin-bottom + $form-height;
 	max-width:320px;
 	overflow:hidden;
-	background:rgba(green, .2);
+	background:rgba(yellow, .2);
 
 }
 
@@ -92,30 +92,32 @@ $chart-margin-bottom: 10px;
 	}
 }
 
-.districts-search--mini {
-	display:none;
-	align-items: center;
-	align-content: center;
-	justify-content: center;
-	flex-wrap:wrap; 
+// .districts-search--mini {
+// 	display:none;
+// 	align-items: center;
+// 	align-content: center;
+// 	justify-content: center;
+// 	flex-wrap:wrap; 
 
-	text-align:center;
-	height: 100%;
+// 	text-align:center;
+// 	height: 100%;
 
-	.districts-search__header{
-		width:100%;
-	}
+// 	.districts-search__header{
+// 		width:100%;
+// 	}
 
-	.submit-button{
-		padding: 15px 0;
-		width: 90%;
-		margin: 10px 0 0 0;
-	}
+// 	.submit-button{
+// 		padding: 15px 0;
+// 		width: 90%;
+// 		margin: 10px 0 0 0;
+// 	}
 
 
-}
+// }
 
 @media all and (max-width:250px){
-	.districts-search {display:none}
-	.districts-search--mini {display:flex;}
+	.districts-search #search-box{display:none;}
+
+	// .districts-search {display:none}
+	// .districts-search--mini {display:flex;}
 }

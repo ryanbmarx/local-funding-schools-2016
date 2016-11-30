@@ -6,6 +6,7 @@ $table_highlight:rgba($trib_blue5, .25);
 @import 'trib-skeleton';
 @import 'datatables_cleanup';
 @import 'district-funding-bars';
+@import 'spinner';
 
 .graphic-wrapper{
 	max-width: 800px;
@@ -217,6 +218,15 @@ $table_highlight:rgba($trib_blue5, .25);
 .trb_mainContent .credits p{
 	@include agate();
 }
+
+@media all and (max-width:839px){
+	.districts-lookup-label,
+	.districts-lookup-legend__label, 
+	.districts-lookup-legend--table{
+		text-align:center;
+	}
+}
+
 
 @media all and (max-width:700px){
 	.trb_mainContent{

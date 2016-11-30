@@ -1,0 +1,15 @@
+@keyframes spinner{
+
+	100%{
+		transform:rotate(360deg);
+	}
+}
+
+.spinner{
+	width: 50px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin: -25px 0 0 -25px;
+	animation: spinner 2s infinite linear;
+}

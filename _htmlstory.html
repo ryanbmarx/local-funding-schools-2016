@@ -6,6 +6,10 @@
  # 
  #}
 {% block content %}
+{# 	<p style='font-family:trb_Icons;'>
+	lllllllll
+		1234567890-==!@#$%^&*()_+qwertyuiop[]\QWERTYUIOP{}|asdfghjkl;'ASDFGHJKL:"zxcvbnm,./ZXCVBNM<>?'
+	</p> #}
 <div class='graphic-wrapper'>
 	<div class="story-link">
 		<p><strong>{{story_link_intro}}:</strong><br /> <a href="{{ story_link }}" target="_blank">{{ story_link_text }}</p>
@@ -22,7 +26,9 @@
 					<dd>One school district</dd>
 				</dl>
 		</figcaption>
-		<div class='scatter__container' data-highlight='all'></div>
+		<div class='scatter__container' data-highlight='all'>
+			<img src='http://{{ ROOT_URL }}/img/spinner.svg' class='spinner' style='width:50px'/>
+		</div>
 	</figure>
 	{%- for chart in charts -%}
 	<figure class='scatter scatter--small' >
@@ -43,7 +49,9 @@
 				<img class='scatter__map' src='http://{{ ROOT_URL }}/img/{{ chart.county_group }}.png' alt="Map of Illinois' {{ chart.county_group }} counties"  />
 			</div>
 			<div class='nine columns'>
-				<div class='scatter__container' data-highlight='{{ chart.county_group }}'></div>
+				<div class='scatter__container' data-highlight='{{ chart.county_group }}'>
+					<img src='http://{{ ROOT_URL }}/img/spinner.svg' class='spinner' style='width:50px'/>
+				</div>
 			</div>
 		</div>
 	<p class="notes">Counties:&nbsp;
@@ -107,44 +115,6 @@
     document.head.appendChild(link);
   });
 
-
-	// var districtsLookup = $('#districts-lookup').DataTable({
-	// 	"paging": true,
-	// 	"searching": true,
-	// 	"ordering": true,
-	// 	"order": [[ 5, "asc" ]],
-	// 	// "bAutoWidth":false,
-	// 	"responsive": {
-	// 		details:{
-	// 			type: 'column',
-	// 			target: 'tr'
-	// 		}, 
-	// 		breakpoints: [
-	// 			{ name: 'desktop', width: Infinity },
-	// 			{ name: 'tablet',  width: 840 },
-	// 			{ name: 'phone',   width: 420 }
-	// 		],
-	// 		"columnDefs": [ 
-	// 			{ "orderable": false, "targets": 0 }
-	// 		]
-	// 	}
-	// });
-	// function getParameterByName(name, url) {
-	//     if (!url) {
-	//       url = window.location.href;
-	//     }
-	//     name = name.replace(/[\[\]]/g, "\\$&");
-	//     var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-	//         results = regex.exec(url);
-	//     if (!results) return null;
-	//     if (!results[2]) return '';
-	//     return decodeURIComponent(results[2].replace(/\+/g, " "));
-	// }
-	// window.onload = function(){
-	// 	let searchValue = getParameterByName('search');
-	// 	console.log(searchValue);
-	// 	districtsLookup.search(searchValue).draw();
-	// }
 })(document);
 </script>
 {% endblock scripts %}
