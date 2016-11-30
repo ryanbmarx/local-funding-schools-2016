@@ -40,5 +40,7 @@ function initTable(){
 	let searchValue = getParameterByName('search');
 	console.log(`Searching table for ${searchValue}`);
 	districtsLookup.search(searchValue).draw();
+	window.scrollTo(0,document.getElementById('districts-lookup').getBoundingClientRect().top);
+
 }
 module.exports = initTable;
