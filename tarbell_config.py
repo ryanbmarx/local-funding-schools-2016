@@ -8,7 +8,7 @@ Tarbell project configuration
 SPREADSHEET_KEY = "16edmCtUOoWm2Q-AQnS8gLt13QZd2KEF3dHTwDe73k2Q"
 
 # Exclude these files from publication
-EXCLUDES = ['*.md', 'requirements.txt', 'node_modules', 'sass', 'js/src', 'package.json', 'Gruntfile.js']
+EXCLUDES = ['*.md', 'scripts', 'requirements.txt', 'node_modules', 'sass', 'js/src', 'package.json', 'Gruntfile.js']
 
 # Spreadsheet cache lifetime in seconds. (Default: 4)
 # SPREADSHEET_CACHE_TTL = 4
