@@ -8,18 +8,16 @@
 {% block content %}
 <div class='graphic-wrapper'>
 	<figure class='year-chart'>
-		<figcaption>
-			chart label here
-		</figcaption>
+		{% include "ai/ai2html-output/school-funding-by-year.html" %}
 	</figure>
 	<div class='districts-search-wrapper'>
 		<form class='districts-search'>
-			  <h1 class='districts-search__header'>Search for your district</h1>
-			  <p  class='districts-search__note'>Will open in new page</p>
-			  <input id="search-box" type="text" name="search" text="Town or district name">
-			  <input type='submit' value = "Search" />
-		  </form>
-	  </div>
+			<h1 class='districts-search__header'>Search for your district</h1>
+			<p class='districts-search__note'>Will open in new page</p>
+			<input id="search-box" type="text" name="search" text="Town or district name">
+			<input type='submit' value = "Search" />
+		</form>
+	</div>
 </div>
 {% endblock content %}
 
