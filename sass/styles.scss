@@ -205,18 +205,18 @@ $table_highlight:rgba($trib_tan, .40);
 	}
 }
 
-
+// The parent/child row indicator
 .district{
-	.district__control{
-		font-family: trb_Icons;
-		font-size: 14px;
-		line-height: 1em;
+	.district__control img{
+		// font-family: trb_Icons;
+		// font-size: 14px;
+		// line-height: 1em;
 		margin: 0;
 		padding: 0;
 		transition:all 250ms;
 	}
 
-	&.parent .district__control{
+	&.parent .district__control img{
 		transform: rotate(90deg);
 		transition:all 250ms;
 	}
@@ -269,6 +269,15 @@ $table_highlight:rgba($trib_tan, .40);
 		.scatter__container{
 			height:300px;
 		}	
+	}
+
+	.trb_mainContent .scatter .scatter__district{
+
+		&:hover{
+			opacity:.25;
+			stroke:transparent;
+			stroke-width:0;
+		}
 	}
 }
 @media all and (max-width:420px){
