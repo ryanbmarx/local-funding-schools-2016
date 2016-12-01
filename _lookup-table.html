@@ -40,6 +40,8 @@
 			<th class='align-right max-tablet'>Local revenue (%)</th>
 			<th class='align-right none'>State revenue ($)</th>
 			<th class='align-right none'>State revenue (%)</th>
+			<th class='align-right none'>Federal revenue ($)</th>
+			<th class='align-right none'>Federal revenue (%)</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -103,6 +105,21 @@
 				<td class='align-right'>
 					{% if district.percent_state_dollars %}
 						{{ "{:.1%}".format(district.percent_state_dollars|float) }}
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
+				{# FEDERAL_FUNDING_DISTRICT_PCT #}
+				<td class='align-right'>
+					{% if district.FEDERAL_FUNDING_DISTRICT_DOLLARS %}
+						${{ "{:,}".format(district.FEDERAL_FUNDING_DISTRICT_DOLLARS) }}
+					{% else %}
+						Not available
+					{% endif %}
+				</td>
+				<td class='align-right'>
+					{% if district.FEDERAL_FUNDING_DISTRICT_PCT %}
+						{{ "{:.1%}".format(district.percent_federal_dollars|float) }}
 					{% else %}
 						Not available
 					{% endif %}
