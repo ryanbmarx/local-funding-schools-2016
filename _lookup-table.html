@@ -44,70 +44,72 @@
 	<tbody>
 		{%- for district in districts if district.TOTAL_REVENUE_SOURCE -%}
 			<tr class='district' data-county="{{ district.county|lower }}">
-				<td class='district__control'>w</td>
+				<td class='district__control'>
+					<img src='http://{{ ROOT_URL }}/img/carat.svg' alt="Carat icon indicating whether row is open or not"/>
+				</td>
 				<td>
 					<span class='district__name'>{{ district.district_name }}</span> <br />
 					<span class='district__city'>{{ district.city }}</span>
 				</td>
 				<td class='district__county'>{{ district.county }}</td>
 				<td class='align-right'>
-					{% if district.DISTRICT_TOTAL_ENROLLMENT %}
+					{%- if district.DISTRICT_TOTAL_ENROLLMENT -%}
 						{{ "{:,}".format(district.DISTRICT_TOTAL_ENROLLMENT) }}
-					{% else %}
+					{%- else -%}
 						Not available
-					{% endif %}
+					{%- endif -%}
 				</td>
 				{# FUNDING "SPARK CHART" #}
 				<td data-order={{ district.percent_local_dollars }}>
-					{% if district.percent_local_dollars and district.percent_state_dollars and district.percent_federal_dollars %}
+					{%- if district.percent_local_dollars and district.percent_state_dollars and district.percent_federal_dollars -%}
 					<div class='bar-wrapper'>
 						<div class='bar bar--local' style='width:{{ district.percent_local_dollars*100 }}%'>
-							{% if district.percent_local_dollars >= 0.50 %}
+							{%- if district.percent_local_dollars >= 0.50 -%}
 								<span>{{ "{:.1%}".format(district.percent_local_dollars) }}&nbsp;&raquo;</span>
-							{% endif %}
+							{%- endif -%}
 						</div>
 						<div class='bar bar--state' style='width:{{ district.percent_state_dollars*100 }}%'>
-							{% if district.percent_local_dollars < 0.50 %}
+							{%- if district.percent_local_dollars < 0.50 -%}
 								<span>&laquo;&nbsp;</span> {{ "{:.1%}".format(district.percent_local_dollars) }}
-							{% endif %}
+							{%- endif -%}
 						</div>
 {# 						<div class='bar bar--federal' style='width:{{ district.percent_federal_dollars*100 }}%'></div> #}
 					</div>
-					{% else %}
+					{%- else -%}
 						Not available
-					{% endif %}
+					{%- endif -%}
 				</td>
 				{# LOCAL_FUNDING #}
 				<td class='align-right'>
-					{% if district.total_local_dollars %}
+					{%- if district.total_local_dollars -%}
 						${{ "{:,}".format(district.total_local_dollars) }}
-					{% else %}
+					{%- else -%}
 						Not available
-					{% endif %}
+					{%- endif -%}
 				</td>
 				<td class='align-right'>
-					{% if district.percent_local_dollars %}
+					{%- if district.percent_local_dollars -%}
 						{{ "{:.1%}".format(district.percent_local_dollars|float) }}
-					{% else %}
+					{%- else -%}
 						Not available
-					{% endif %}
+					{%- endif -%}
 				</td>
 				{# STATE_FUNDING #}
 				<td class='align-right'>
-					{% if district.GENERAL_STATE_AID_DISTRICT_DOLLAR and district.OTHER_STATE_FUNDING_DISTRICT_DOLLAR and district.percent_state_dollars%}
-						{% set state_aid = district.GENERAL_STATE_AID_DISTRICT_DOLLAR|int + district.OTHER_STATE_FUNDING_DISTRICT_DOLLAR|int %}
+					{%- if district.GENERAL_STATE_AID_DISTRICT_DOLLAR and district.OTHER_STATE_FUNDING_DISTRICT_DOLLAR and district.percent_state_dollars-%}
+						{%- set state_aid = district.GENERAL_STATE_AID_DISTRICT_DOLLAR|int + district.OTHER_STATE_FUNDING_DISTRICT_DOLLAR|int -%}
 						${{ "{:,}".format(state_aid) }} ({{ "{:.1%}".format(district.percent_state_dollars|float) }})
-					{% else %}
+					{%- else -%}
 						Not available
-					{% endif %}
+					{%- endif -%}
 				</td>
 				{# FEDERAL_FUNDING #}
 				<td class='align-right'>
-					{% if district.percent_federal_dollars and district.FEDERAL_FUNDING_DISTRICT_DOLLAR %}
+					{%- if district.percent_federal_dollars and district.FEDERAL_FUNDING_DISTRICT_DOLLAR -%}
 						${{ "{:,}".format(district.FEDERAL_FUNDING_DISTRICT_DOLLAR) }} ({{ "{:.1%}".format(district.percent_federal_dollars|float) }})
-					{% else %}
+					{%- else -%}
 						Not available
-					{% endif %}
+					{%- endif -%}
 				</td>
 			</tr>
 		{%- endfor -%}
