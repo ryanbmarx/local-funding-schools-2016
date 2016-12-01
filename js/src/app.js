@@ -76,8 +76,8 @@ function drawScatter(data, container, highlight){
 			return `
 			<strong>${d.SCHOOL_NAME}</strong><br />
 			${d.county} County<br />
-			<strong>Local funding:</strong> ${d3.format(".1%")(d[window.y_series])}<br />
-			<strong>Median household income:</strong> ${d3.format("($,")(d[window.x_series])}
+			<strong>${window.y_label}:</strong> ${d3.format(".1%")(d[window.y_series])}<br />
+			<strong>${window.x_label}:</strong> ${d3.format("($,")(d[window.x_series])}
 			`; 
 		});
 
@@ -181,7 +181,9 @@ function drawScatter(data, container, highlight){
 		.attr('points',`${x(median_x)},7 ${x(median_x) + 5},-2  ${x(median_x) - 5},-2  ${x(median_x)},7`)
 		.style('fill', '#888888');
 
-	scatterPlot.call(tip);
+	// If on desktop, enable tooltips
+	if(window.innerWidth > 850){scatterPlot.call(tip);}
+
 	scatterPlot.selectAll('circle')
 		.data(filteredData)
 		.enter()
