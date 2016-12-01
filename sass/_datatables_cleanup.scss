@@ -25,3 +25,11 @@
 		font-weight:bold;
 	}
 }
+
+@media all and (max-width:849px){
+	.dataTables_wrapper .dataTables_length, 
+	.dataTables_wrapper .dataTables_filter {
+		// This will left-align the pagination menu and search bar on mobile widths.
+	    text-align: left;
+	}
+}

@@ -1,6 +1,9 @@
 @import 'base-variables';
 
-$table_highlight:rgba($trib_blue5, .25);
+$local_color: $trib_blue2;
+$state_color: $trib_blue4;
+$federal_color: $trib_gray4;
+$table_highlight:rgba($trib_tan, .40);
 
 @import 'base-mixins';
 @import 'trib-skeleton';
@@ -140,15 +143,10 @@ $table_highlight:rgba($trib_blue5, .25);
 .districts-lookup-legend--table{
 	@include trib-legend();
 
-	dt span{
+	.trib-legend__box--local-district{
 		@include trib_legend__box(0);
 		background:$table_highlight;
 	}
-}
-
-
-.districts-lookup-legend--funding{
-	@include trib-legend('inline');
 
 	.trib-legend__box--local-money{
 		@include trib_legend__box(0);
@@ -227,13 +225,7 @@ $table_highlight:rgba($trib_blue5, .25);
 	@include agate();
 }
 
-@media all and (max-width:839px){
-	.districts-lookup-label,
-	.districts-lookup-legend__label, 
-	.districts-lookup-legend--table{
-		text-align:center;
-	}
-}
+
 
 
 @media all and (max-width:700px){
