@@ -63,15 +63,15 @@
 					<div class='bar-wrapper'>
 						<div class='bar bar--local' style='width:{{ district.percent_local_dollars*100 }}%'>
 							{% if district.percent_local_dollars >= 0.50 %}
-								<span>{{ "{:.1%}".format(district.percent_local_dollars) }}</span>
+								<span>{{ "{:.1%}".format(district.percent_local_dollars) }}&nbsp;&raquo;</span>
 							{% endif %}
 						</div>
 						<div class='bar bar--state' style='width:{{ district.percent_state_dollars*100 }}%'>
 							{% if district.percent_local_dollars < 0.50 %}
-								<small>&#9664;&nbsp;</small> {{ "{:.1%}".format(district.percent_local_dollars) }}
+								<span>&laquo;&nbsp;</span> {{ "{:.1%}".format(district.percent_local_dollars) }}
 							{% endif %}
 						</div>
-						<div class='bar bar--federal' style='width:{{ district.percent_federal_dollars*100 }}%'></div>
+{# 						<div class='bar bar--federal' style='width:{{ district.percent_federal_dollars*100 }}%'></div> #}
 					</div>
 					{% else %}
 						Not available
