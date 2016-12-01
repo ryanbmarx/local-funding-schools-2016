@@ -89,7 +89,7 @@ function drawScatter(data, container, highlight){
 	const 	bbox = d3.select(container).node().getBoundingClientRect();
 	const 	height = bbox.height,
 			width = bbox.width,
-			margin = {top:50, right:15, bottom:50, left:60},
+			margin = {top:25, right:15, bottom:25, left:60},
 			innerHeight = height - margin.top - margin.left,
 			innerWidth = width - margin.left - margin.right;
 	// Get our basic chart container in order.
@@ -154,7 +154,7 @@ function drawScatter(data, container, highlight){
     	.classed('axis-label', true)
     	.classed('axis-label--x', true)
     	.attr('x', innerWidth/2)
-    	.attr('y', (innerHeight + margin.top))
+    	.attr('y', (height-margin.bottom-16))
     	.attr("text-anchor", "middle")
     	.text(window.x_label);
 
@@ -174,7 +174,7 @@ function drawScatter(data, container, highlight){
 			.text(`Illinois median income: ${d3.format("($,")(median_x)}`)
 			.attr('y',0)
 			.attr('x', x(median_x))
-			.attr('dy', '-.4em')
+			.attr('dy', '-.5em')
 			.attr('text-anchor', 'middle')
 
 	scatterPlot.append('polygon')
