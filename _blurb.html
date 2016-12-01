@@ -35,16 +35,16 @@ window.onload = function(){
 	document.querySelector(".districts-search").addEventListener("submit", function(e){
 		e.preventDefault(); 
 		
-		// Analytics
-		var eventString = 'Blurb submit button, larger';
+		/* Analytics */
+		/*var eventString = 'Blurb submit button, larger';
 		s.linkTrackVars = "server, prop20, prop28, prop33, prop34, prop57, prop62, eVar20, eVar21, eVar34, eVar35, eVar36, eVar37, eVar38, eVar39, eVar51";
 		s.prop57 = eventString;
 		s.tl(this, 'o', eventString);
-		// End Analytics
+		/* End Analytics */
 
-		// Redirect with search value in URL
+		/* Redirect with search value in URL */
 		var searchValue = document.getElementById('search-box').value;
-		window.location = `http://{{ ROOT_URL }}/htmlstories/ct-local-school-funding?search="${encodeURIComponent(searchValue)}"`;
+		window.open(`http://{{ ROOT_URL }}/htmlstories/ct-local-school-funding?search="${encodeURIComponent(searchValue)}"`, "_blank");
 	});
 }
 </script>
