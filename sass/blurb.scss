@@ -8,10 +8,9 @@ $chart-margin-bottom: 10px;
 .graphic-wrapper{
 	@include clearfix();
 	height:$chart-height + $chart-margin-bottom + $form-height;
-	max-width:320px;
+	max-width:360px;
+	margin:0 auto;
 	overflow:hidden;
-	background:rgba(yellow, .2);
-
 }
 
 
@@ -24,9 +23,9 @@ $chart-margin-bottom: 10px;
 		@include label7();
 	}
 
-	.g-artboard{
-		margin:0;
-	}
+	// .g-artboard{
+	// 	margin:0;
+	// }
 }
 .districts-search-wrapper{
 
