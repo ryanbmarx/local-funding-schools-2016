@@ -243,6 +243,16 @@ $table_highlight:rgba($trib_tan, .40);
 			display: none;
 		}
 	}
+
+	.trb_mainContent .story-link{
+		padding:10px;
+	    max-width: 125px;
+	    margin: 0 0 10px 15px;
+
+		p{
+			font-size: 14px;
+		}
+	}
 }
 
 @media all and (max-width:420px){
