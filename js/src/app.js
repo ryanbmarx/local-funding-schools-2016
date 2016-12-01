@@ -8,35 +8,12 @@ var initTable = require('./school-funding-table');
 // It's a bit of a hack since the same data points are used for several counties, 
 // but I just want them stacked.
 const chicagoarea_median_household_incomes = [
-	{
-		county:"Cook",
-		income:54828
-	},
-
-	{
-		county:"Dupage",
-		income:77873
-	},
-
-	{
-		county:"Lake",
-		income:77873
-	},
-
-	{
-		county:"McHenry",
-		income:77873
-	},
-
-	{
-		county:"Will",
-		income:77873
-	},
-
-	{
-		county:"Kane",
-		income:70514
-	}
+	{county:"Cook", income:54828},
+	{county:"Dupage", income:77873},
+	{county:"Lake", income:77873},
+	{county:"McHenry", income:77873},
+	{county:"Will", income:77873},
+	{county:"Kane", income:70514}
 ]
 
 // function tooltip(hide, d){
@@ -89,8 +66,8 @@ function drawScatter(data, container, highlight){
 	const 	bbox = d3.select(container).node().getBoundingClientRect();
 	const 	height = bbox.height,
 			width = bbox.width,
-			margin = {top:25, right:15, bottom:25, left:60},
-			innerHeight = height - margin.top - margin.left,
+			margin = {top:45, right:15, bottom:45, left:60},
+			innerHeight = height - margin.top - margin.bottom,
 			innerWidth = width - margin.left - margin.right;
 	// Get our basic chart container in order.
 	const scatterPlot = d3.select(container)
@@ -142,12 +119,10 @@ function drawScatter(data, container, highlight){
 	// Now with the X, which we want to format differently at smaller widths
 		let xScale;
 		if (window.innerWidth > 600){
-			console.log('wide');
 			// Wide widths
 			xScale = d3.axisBottom(x)
 				.ticks(5, "($,f");
 		} else {
-			console.log('skinny');
 			// Skinny widths
 			xScale = d3.axisBottom(x)
 				.ticks(5, "s");
@@ -164,7 +139,8 @@ function drawScatter(data, container, highlight){
     	.classed('axis-label', true)
     	.classed('axis-label--x', true)
     	.attr('x', innerWidth/2)
-    	.attr('y', (height-margin.bottom-16))
+    	.attr('y', innerHeight + margin.bottom)
+    	.attr('dy', '-.5em')
     	.attr("text-anchor", "middle")
     	.text(window.x_label);
 
@@ -180,16 +156,24 @@ function drawScatter(data, container, highlight){
 		.style('stroke-width', 3)
 	
 	scatterPlot.append('text')
-			.classed('scatter__median-label', true)
-			.text(`Illinois median income: ${d3.format("($,")(median_x)}`)
-			.attr('y',0)
-			.attr('x', x(median_x))
-			.attr('dy', '-.5em')
-			.attr('text-anchor', 'middle')
+		.classed('scatter__median-label', true)
+		.text(`Illinois median`)
+		.attr('y',0)
+		.attr('x', x(median_x))
+		.attr('dy', '-1.6em')
+		.attr('text-anchor', 'middle')
 
-	scatterPlot.append('polygon')
-		.attr('points',`${x(median_x)},7 ${x(median_x) + 5},-2  ${x(median_x) - 5},-2  ${x(median_x)},7`)
-		.style('fill', '#888888');
+	scatterPlot.append('text')
+		.classed('scatter__median-label', true)
+		.text(`income: ${d3.format("($,")(median_x)}`)
+		.attr('y',0)
+		.attr('x', x(median_x))
+		.attr('dy', '-.5em')
+		.attr('text-anchor', 'middle')
+
+	// scatterPlot.append('polygon')
+	// 	.attr('points',`${x(median_x)},7 ${x(median_x) + 5},-2  ${x(median_x) - 5},-2  ${x(median_x)},7`)
+	// 	.style('fill', '#888888');
 
 	// If on desktop, enable tooltips
 	if(window.innerWidth > 850){scatterPlot.call(tip);}
