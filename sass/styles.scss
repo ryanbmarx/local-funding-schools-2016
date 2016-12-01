@@ -23,6 +23,7 @@ $table_highlight:rgba($trib_tan, .40);
     max-width: 200px;
     margin: 0 0 15px 25px;
     border-left:2px solid $trib_blue2;
+    z-index:1000;
 
 	p{
 		@include sans-serif();
@@ -41,7 +42,7 @@ $table_highlight:rgba($trib_tan, .40);
 
 	&__container{
 		width:100%;
-		height:450px !important;
+		height:450px;
 		position:relative;
 		// background:rgba(black, .1);
 	}	
@@ -254,7 +255,13 @@ $table_highlight:rgba($trib_tan, .40);
 		}
 	}
 }
-
+@media all and (max-width:600px){
+	.trb_mainContent .scatter--small{
+		.scatter__container{
+			height:300px;
+		}	
+	}
+}
 @media all and (max-width:420px){
 	.trb_mainContent{
 		.scatter__label{
