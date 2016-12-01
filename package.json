@@ -5,7 +5,7 @@
   "main": "js/src/app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run downloadData && grunt",
+    "build": "npm run downloadData && grunt && npm run cleanUpSVGs",
     "downloadData": "node scripts/downloadCSV.js",
     "cleanUpSVGs": "node scripts/clean-ai2html-svg-artboard.js ./ai/ai2html-output/",
     "watch": "parallelshell 'npm run watch:ai2html' 'grunt watch'",
