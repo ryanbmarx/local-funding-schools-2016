@@ -35,7 +35,7 @@
 			<th class='none'>City</th>
 			<th>County</th>
 			<th class='align-right'>Enrollment</th>
-			<th class='min-tablet'>Funding by source<br /><em>Local funding noted</em></th>
+			<th class='min-tablet'>Funding by source</th>
 			<th class='align-right none'>Local revenue ($)</th>
 			<th class='align-right max-tablet'>Local revenue (%)</th>
 			<th class='align-right none'>State revenue ($)</th>
@@ -87,18 +87,22 @@
 				</td>
 				<td class='align-right'>
 					{% if district.percent_local_dollars %}
-						{{ "{:.1%}".format(district.percent_local_dollars) }}
+						{{ "{:.1%}".format(district.percent_local_dollars|float) }}
 					{% else %}
 						Not available
 					{% endif %}
 				</td>
 				<td class='align-right'>
-					state dollars TK
+					{% if district.GENERAL_STATE_AID_DISTRICT_DOLLAR and district.OTHER_STATE_FUNDING_DISTRICT_DOLLAR %}
+						{% set state_aid = district.GENERAL_STATE_AID_DISTRICT_DOLLAR|int + district.OTHER_STATE_FUNDING_DISTRICT_DOLLAR|int %}
+						${{ "{:,}".format(state_aid) }}
+					{% else %}
+						Not available
+					{% endif %}
 				</td>
 				<td class='align-right'>
 					{% if district.percent_state_dollars %}
-						{# {{ "{:.1%}".format(district.percent_state_dollars) }} #}
-						{{ district.percent_state_dollars }}
+						{{ "{:.1%}".format(district.percent_state_dollars|float) }}
 					{% else %}
 						Not available
 					{% endif %}
