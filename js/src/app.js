@@ -33,7 +33,7 @@ function checkCountyGroup(county, groupToHighlight) {
 
 function drawScatter(data, container, highlight){
 	// Log what the hell is going on.
-	console.log(`Putting a ${highlight} chart into ${container}`);
+	console.log(`Putting a ${highlight} chart into`, container);
 
 	let filteredData;
 
@@ -140,7 +140,7 @@ function drawScatter(data, container, highlight){
     	.classed('axis-label--x', true)
     	.attr('x', innerWidth/2)
     	.attr('y', innerHeight + margin.bottom)
-    	.attr('dy', '-.5em')
+    	.attr('dy', '-.3em')
     	.attr("text-anchor", "middle")
     	.text(window.x_label);
 
@@ -214,8 +214,8 @@ function drawScatter(data, container, highlight){
 		.style('text-anchor', 'end')
 		.style('color', 'white')
 		.style('stroke', 'white')
-		.style('stroke-width', 3)
-		.style('opacity', .75)
+		.style('stroke-width', 5)
+		// .style('opacity', 1)
 		.classed('scatter__median-label', true);
 
 	scatterPlot.append('text')
@@ -241,8 +241,8 @@ function drawScatter(data, container, highlight){
 			.style('text-anchor', 'middle')
 			.style('color', 'white')
 			.style('stroke', 'white')
-			.style('stroke-width', 3)
-			.style('opacity', .75)
+			.style('stroke-width', 5)
+			// .style('opacity', .75)
 			.style('font-weight', "bold");
 
 		scatterPlot.append('text')
