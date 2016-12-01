@@ -164,6 +164,7 @@ $table_highlight:rgba($trib_tan, .40);
 
 .districts-lookup-label{
 	@include label4();
+	margin:25px 0 0 0;
 }
 
 .districts-lookup{
@@ -228,7 +229,7 @@ $table_highlight:rgba($trib_tan, .40);
 
 
 
-@media all and (max-width:700px){
+@media all and (max-width:840px){
 	.trb_mainContent{
 		.scatter__map, .map-label, .map-legend{
 			display: none;

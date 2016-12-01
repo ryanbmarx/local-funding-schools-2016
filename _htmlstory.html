@@ -11,8 +11,12 @@
 		1234567890-==!@#$%^&*()_+qwertyuiop[]\QWERTYUIOP{}|asdfghjkl;'ASDFGHJKL:"zxcvbnm,./ZXCVBNM<>?'
 	</p> #}
 <div class='graphic-wrapper'>
+<section id='dataviz'>
 	<div class="story-link">
-		<p><strong>{{story_link_intro}}:</strong><br /> <a href="{{ story_link }}" target="_blank">{{ story_link_text }}</p>
+		<p>
+			<strong>{{story_link_intro}}:</strong><br />
+			<a href="{{ story_link }}" target="_blank">{{ story_link_text }}</a>
+		</p>
 	</div>
 	{{ intro|markdown }}
 
@@ -62,7 +66,7 @@
 	</figure>
 	{%- endfor -%}
 	
-
+</section>
 	{% include "_lookup-table.html" %}
 
 	<div class='credits'>

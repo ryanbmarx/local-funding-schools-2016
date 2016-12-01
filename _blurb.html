@@ -20,11 +20,11 @@
 			<input id="search-box" type="text" name="search" text="Town or district name">
 			<input  class='submit-button' type='submit' value = "Search" />
 		</form>
-		<div class='districts-search--mini'>
+{# 		<div class='districts-search--mini'>
 			<h1 class='districts-search__header'>Find your district</h1>
 			<p class='districts-search__note'>Will open in new page</p>
 			<a href='{{ app_link }}' class='submit-button'>Search the data<a/>
-		</div>
+		</div> #}
 
 	</div>
 </div>
@@ -34,11 +34,18 @@
 window.onload = function(){
 	document.querySelector(".districts-search").addEventListener("submit", function(e){
 		e.preventDefault(); 
+		
+		// Analytics
+		var eventString = 'Blurb submit button, larger';
+		s.linkTrackVars = "server, prop20, prop28, prop33, prop34, prop57, prop62, eVar20, eVar21, eVar34, eVar35, eVar36, eVar37, eVar38, eVar39, eVar51";
+		s.prop57 = eventString;
+		s.tl(this, 'o', eventString);
+		// End Analytics
+
+		// Redirect with search value in URL
 		var searchValue = document.getElementById('search-box').value;
-		console.log('submit', searchValue);
-		window.location = `http://{{ ROOT_URL }}/htmlstories/ct-local-school-funding#districts-lookup?search="${encodeURIComponent(searchValue)}"`;
-		// return false
-	})
+		window.location = `http://{{ ROOT_URL }}/htmlstories/ct-local-school-funding?search="${encodeURIComponent(searchValue)}"`;
+	});
 }
 </script>
 
