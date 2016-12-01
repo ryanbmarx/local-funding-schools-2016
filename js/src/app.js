@@ -139,9 +139,19 @@ function drawScatter(data, container, highlight){
     	.text(window.y_label);
 
 
-	// Now with the X
-	const xScale = d3.axisBottom(x)
-		.ticks(5, "($,f");
+	// Now with the X, which we want to format differently at smaller widths
+		let xScale;
+		if (window.innerWidth > 600){
+			console.log('wide');
+			// Wide widths
+			xScale = d3.axisBottom(x)
+				.ticks(5, "($,f");
+		} else {
+			console.log('skinny');
+			// Skinny widths
+			xScale = d3.axisBottom(x)
+				.ticks(5, "s");
+		}
 
 	scatterPlot.append("g")
     	.classed('x', true)
