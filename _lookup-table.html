@@ -32,7 +32,6 @@
 		<tr>
 			<th class='control'></th>
 			<th>District<br /><em>City</em></th>
-			<th class='none'>City</th>
 			<th>County</th>
 			<th class='align-right'>Enrollment</th>
 			<th class='min-tablet'>Funding by source</th>
@@ -52,7 +51,6 @@
 					<span class='district__name'>{{ district.district_name }}</span> <br />
 					<span class='district__city'>{{ district.city }}</span>
 				</td>
-				<th>{{ district.city }}</th>
 				<td class='district__county'>{{ district.county }}</td>
 				<td class='align-right'>
 					{% if district.DISTRICT_TOTAL_ENROLLMENT %}
