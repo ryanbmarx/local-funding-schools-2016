@@ -6,8 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "npm run downloadData && grunt",
-    "watch": "grunt watch",
-    "downloadData": "node scripts/downloadCSV.js"
+    "downloadData": "node scripts/downloadCSV.js",
+    "cleanUpSVGs": "node scripts/clean-ai2html-svg-artboard.js ./ai/ai2html-output/",
+    "watch": "parallelshell 'npm run watch:ai2html' 'grunt watch'",
+    "watch:ai2html": "onchange 'ai/ai2html-output/' -- npm run cleanUpSVGs"
   },
   "repository": {
     "type": "git",
@@ -26,6 +28,8 @@
     "grunt-contrib-watch": "^0.6.1",
     "grunt-sass": "^1.2.0",
     "minifyify": "^7.3.3",
+    "onchange": "^3.0.2",
+    "parallelshell": "^2.0.0",
     "request": "^2.79.0",
     "trib-styles": "git+https://tribune.unfuddle.com/git/tribune_trib-styles/"
   },

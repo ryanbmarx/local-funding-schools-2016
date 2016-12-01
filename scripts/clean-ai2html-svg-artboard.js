@@ -3,7 +3,19 @@ var fs = require('fs'),
     cheerio = require('cheerio'),
     dir = process.argv[2];
 
-cleanSVGArtboard(fn);
+    console.log(`>>> Cleaning up SVGs in ${dir}`);
+
+    // open up desired dir.
+    fs.readdir(dir, function(err, files){
+        if (err) throw err;
+        files.forEach(file =>{
+            if(file.split('.')[1] == "svg"){
+                var fn = `${dir}/${file}`;
+                cleanSVGArtboard(fn);
+            }
+        })
+    })
+
 
 function cleanSVGArtboard(svgFileName, svg_embed_images) {
     if (!fs.existsSync(svgFileName)) return;
@@ -31,7 +43,7 @@ function cleanSVGArtboard(svgFileName, svg_embed_images) {
     $('g:empty').remove();
 
     fs.writeFileSync(svgFileName, $.xml(), 'utf8');
-    console.log('cleaned '+fn);
+    // console.log('cleaned ' + svgFileName);
     return;
 
 }
