@@ -11,26 +11,34 @@ $table_highlight:rgba($trib_tan, .40);
 @import 'district-funding-bars';
 @import 'spinner';
 
-.graphic-wrapper{
+.trb_mainContent .graphic-wrapper{
 	max-width: 800px;
 	margin:0 auto;
-}
-
-.trb_mainContent .story-link{
-	padding:15px;
-	background:$trib_blue5;
-    float: right;
-    max-width: 200px;
-    margin: 0 0 15px 25px;
-    border-left:2px solid $trib_blue2;
-    z-index:1000;
-
+	
 	p{
-		@include sans-serif();
-		margin:0;
-		cursor:pointer;
+		width:auto;
 	}
 }
+
+.trb_mainContent 
+	
+
+	.story-link{
+		padding:15px;
+		background:$trib_blue5;
+	    float: right;
+	    max-width: 200px;
+	    margin: 0 0 15px 25px;
+	    border-left:2px solid $trib_blue2;
+	    z-index:1000;
+	    position: relative;
+
+		p{
+			@include sans-serif();
+			margin:0;
+			cursor:pointer;
+		}
+	}
 
 .trb_mainContent .scatter{
 	@include trib-chart();
@@ -81,6 +89,7 @@ $table_highlight:rgba($trib_tan, .40);
 
 	&__legend{
 		@include trib-legend();
+		margin-bottom:5px;
 
 		span{
 			@include trib_legend__box('circle');
