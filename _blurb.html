@@ -35,7 +35,7 @@
 
 		/* Redirect with search value in URL */
 		var searchValue = document.getElementById('search-box').value;
-		var urlToOpen = `{{ scatter_link }}?search=` + encodeURIComponent(searchValue);
+		var urlToOpen = `{{ scatter_link }}?int=localSchoolFundingSearch&search=` + encodeURIComponent(searchValue);
 		console.log(searchValue, urlToOpen);
 		window.open(urlToOpen, "_blank");
 	});
