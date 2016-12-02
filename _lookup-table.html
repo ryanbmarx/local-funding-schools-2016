@@ -39,13 +39,14 @@
 			<th class='align-right max-tablet'>Local revenue (%)</th>
 			<th class='align-right none'>State revenue</th>
 			<th class='align-right none'>Federal revenue</th>
+			<th class='align-right none'>Total spending per pupil</th>
 		</tr>
 	</thead>
 	<tbody>
 		{%- for district in districts if district.TOTAL_REVENUE_SOURCE -%}
 			<tr class='district' data-county="{{ district.county|lower }}">
 				<td class='district__control'>
-					<img src='http://{{ ROOT_URL }}/img/carat.svg' alt="Carat icon indicating whether row is open or not"/>
+					<img src='http://{{ ROOT_URL }}/img/carat.svg' alt="Carat icon indicating whether row is open or not" style='width: 6px;' />
 				</td>
 				<td>
 					<span class='district__name'>{{ district.district_name }}</span> <br />
@@ -107,6 +108,15 @@
 				<td class='align-right'>
 					{%- if district.percent_federal_dollars and district.FEDERAL_FUNDING_DISTRICT_DOLLAR -%}
 						${{ "{:,}".format(district.FEDERAL_FUNDING_DISTRICT_DOLLAR) }} ({{ "{:.1%}".format(district.percent_federal_dollars|float) }})
+					{%- else -%}
+						Not available
+					{%- endif -%}
+				</td>
+				<td class='align-right'>
+					{# TOTAL PER PUPIL SPENDING #}
+					{%- if district.DISTRICT_TOTAL_ENROLLMENT and district.TOTAL_REVENUE_SOURCE -%}
+						{% set per_pupil_spending = district.TOTAL_REVENUE_SOURCE|int / district.DISTRICT_TOTAL_ENROLLMENT|int %}
+						${{ "{:,.2f}".format(per_pupil_spending) }}
 					{%- else -%}
 						Not available
 					{%- endif -%}

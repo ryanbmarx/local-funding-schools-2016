@@ -207,7 +207,9 @@ $table_highlight:rgba($trib_tan, .40);
 
 // The parent/child row indicator
 .district{
-	.district__control img{
+	.district__control {
+	    width: 12px;
+		img{
 		// font-family: trb_Icons;
 		// font-size: 14px;
 		// line-height: 1em;
@@ -220,7 +222,7 @@ $table_highlight:rgba($trib_tan, .40);
 		transform: rotate(90deg);
 		transition:all 250ms;
 	}
-
+}
 
 }
 
