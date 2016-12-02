@@ -208,22 +208,22 @@ $table_highlight:rgba($trib_tan, .40);
 // The parent/child row indicator
 .district{
 	.district__control {
-	    width: 12px;
+		width: 12px;
 		img{
-		// font-family: trb_Icons;
-		// font-size: 14px;
-		// line-height: 1em;
-		margin: 0;
-		padding: 0;
-		transition:all 250ms;
+			// font-family: trb_Icons;
+			// font-size: 14px;
+			// line-height: 1em;
+			margin: 0;
+			padding: 0;
+			transition:all 250ms;
+			transform: rotate(-90deg);
+		}
 	}
-
 	&.parent .district__control img{
 		transform: rotate(90deg);
 		transition:all 250ms;
 	}
-}
-
+	
 }
 
 .trb_mainContent .districts-lookup .child li span{
